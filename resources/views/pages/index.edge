@@ -1,0 +1,49 @@
+@layout.app() 
+@set('title', 'Adonis Shop')
+
+    @slot('main')
+
+    <section class="max-w-7xl mx-auto mt-6 relative group mt-[100px]">
+
+
+        <div class="overflow-hidden rounded-lg">
+        <div id="slides" class="flex transition-transform duration-500">
+
+            <div class="min-w-full h-72 md:h-96 relative group">
+            <img src="/resources/elemen/2.png" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gray-900/60 opacity-0 flex flex-col justify-center items-center group-hover:opacity-100 transition duration-300 flex flex-col justify-center px-8">
+                <h2 class="text-3xl font-bold text-white">Halloween Flash Sale</h2>
+                <p class="text-gray-200 mt-2">Hurry and take advantage of the Halloween discount promo!</p>
+                <button class="mt-4 bg-[#00ff88] text-gray-900 font-semibold px-5 py-2 rounded-lg hover:bg-[#00d26a] transition">see more discount</button>
+            </div>
+            </div>
+
+            <div class="min-w-full h-72 md:h-96 relative group">
+            <img src="/resources/elemen/1.png" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gray-900/60 flex justify-center items-center flex-col opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-center px-8">
+                <h2 class="text-3xl font-bold text-white">Home Furniture</h2>
+                <p class="text-gray-200 mt-2">Make your home more comfortable and beautiful.</p>
+                <button class="mt-4 bg-[#00ff88] text-gray-900 font-semibold px-5 py-2 rounded-lg hover:bg-[#00d26a] transition">shop now</button>
+            </div>
+            </div>
+            <div class="min-w-full h-72 md:h-96 relative group">
+                <img src="/resources/elemen/3.png" class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-gray-900/60 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-center items-center text-center px-8 h-full">
+                    <h2 class="text-3xl font-bold text-white">This Week's Special Discount</h2>
+                    <p class="text-gray-200 mt-2">Find great deals only here.</p>
+                    <button class="mt-4 bg-[#00ff88] text-gray-900 font-semibold px-5 py-2 rounded-lg hover:bg-[#00d26a] transition">Explore
+                    </button>
+                </div>
+
+            </div>
+        </div>
+        </div>
+        <button id="prevBtn" class="absolute left-0 top-1/2 -translate-y-1/2 bg-gray-800/60 hover:bg-gray-800 text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition">❮</button>
+        <button id="nextBtn" class="absolute right-0 top-1/2 -translate-y-1/2 bg-gray-800/60 hover:bg-gray-800 text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition">❯</button>
+    </section>
+
+    <div id="productContainer" class="mt-[50px] grid w-[80%] gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 max-w-8xl mx-auto lg:grid-cols-4"></div>
+    @endslot
+
+
+@end

@@ -1,0 +1,44 @@
+@layout.app() 
+@set('title', 'Your Cart')
+
+@slot('main')
+<div class="max-w-6xl mx-auto px-5 py-10 mt-[70px]">
+  <h1 class="text-3xl font-semibold text-white mb-6">Shopping Cart</h1>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+    <div class="lg:col-span-2 space-y-4">
+
+      <div class="glass rounded-lg p-4 flex items-center gap-3 shadow-[0_0_8px_#c5e943]">
+        <input id="selectAll" type="checkbox" class="w-5 h-5 accent-brand-green"/>
+        <label for="selectAll" class="text-sm text-gray-200">Select All <span id="countItems" class="text-xs text-gray-400 ml-2">(2)</span></label>
+      </div>
+
+      <div id="itemsContainer" class="space-y-4">
+        <!-- Item cards will be rendered via JS -->
+      </div>
+    </div>
+
+    <aside class="glass rounded-lg p-5 shadow-[0_0_8px_#c5e943]">
+      <h2 class="text-lg font-semibold mb-4 text-white">Order Summary</h2>
+
+      <div class="flex items-center justify-between text-sm text-gray-300 mb-4">
+        <span>Total</span>
+        <strong id="totalText" class="text-white">-</strong>
+      </div>
+      
+      <div class="bg-white/5 p-3 rounded-lg text-sm text-gray-200 mb-4 flex items-center gap-3">
+        <div class="w-10 h-10 bg-brand-green/20 rounded flex items-center justify-center">🙂</div>
+        <div class="flex-1">
+          <div class="text-sm font-medium text-white">Select items before checkout</div>
+          <div class="text-xs text-gray-400">Click the checkbox on the left of each product</div>
+        </div>
+      </div>
+
+      <button id="buyBtn" class="w-full mt-[30px] py-3 rounded-full text-white font-semibold" style="background:linear-gradient(90deg,#00E676,#00C853)">Buy</button>
+    </aside>
+  </div>
+</div>
+@endslot
+
+@end

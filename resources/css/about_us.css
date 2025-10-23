@@ -1,0 +1,100 @@
+.konten1{
+    width: 100%;
+    height: 400px;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.konten1 video{
+    position: absolute;
+    object-fit: cover;
+    width: 100%;
+    height: 400px;       /* Tinggi sesuai keinginan */
+    object-fit: cover;   /* Agar tidak gepeng, isi penuh area */
+    display: block;
+    opacity: 0.3;
+}
+
+.konten1 h1{
+    font-size: 110px;
+    font-family: "Roboto", sans-serif;
+    color: white;
+    opacity: 0.7;
+}
+
+.konten2 p{
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    z-index: 5;
+    max-width:90%; 
+    margin:0 auto; 
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 1.2em;
+    letter-spacing: -0.03em
+}
+
+.konten2 p span{
+    color: #c5e943;
+}
+
+.konten2{
+    margin-top: 10px;
+}
+
+.konten2 img{
+    width: 100%;
+    height: auto    ;
+}
+
+.bulat {
+  width: 50px;      
+  height: 50px;     
+  object-fit: cover;
+  border-radius: 50%; 
+}
+
+.konten3{
+    padding-top: 50px;
+    padding: 10% 20px;
+    width: 100%;
+    height: auto;
+    display: flex;
+    columns: row;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+}
+
+.konten3-2{
+    width: 50%;
+}
+
+.konten3-1{
+    display: flex;
+    width: 50%;
+    padding-left: 30px;
+}
+
+.konten3 p, h3, h1, h2{
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+.konten3 h3{
+    font-size: 30px;
+    font-weight: 300;
+    width: 100%;
+    line-height: 1.2em;
+    letter-spacing: -0.03em;
+}
+
+.konten3 h2{
+    padding-left: 50px;
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 1.2em;
+    letter-spacing: -0.03em
+}

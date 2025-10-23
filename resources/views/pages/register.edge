@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="contact.css">
+    <title>Furnivo - Modern & Durable Furniture</title>
+    @vite('resources/css/style.css')
+    @vite('resources/css/contact.css')
+    @vite('resources/css/login.css')
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+     <main class="main flex justify-center items-center">
+    <div class="contact-form login shadow-[0_0_20px_rgba(71,255,152,0.3)] bg-[#111] p-8 rounded-2xl w-96">
+      <h2 class="text-3xl font-semibold text-center text-white mb-6 hover:text-green-400 transition">REGISTER</h2>
+
+      <form id="registerForm" class="flex flex-col space-y-5">
+        <input id="username" name="username" type="text" required
+               class="border-b border-gray-600 outline-none bg-transparent text-white placeholder-gray-400 pb-2"
+               placeholder="Username">
+
+        <input id="email" name="email" type="email" required
+               class="border-b border-gray-600 outline-none bg-transparent text-white placeholder-gray-400 pb-2"
+               placeholder="Email">
+
+        <input id="password" name="password" type="password" required
+               class="border-b border-gray-600 outline-none bg-transparent text-white placeholder-gray-400 pb-2"
+               placeholder="Password">
+
+        <input id="confirm" name="confirm" type="password" required
+               class="border-b border-gray-600 outline-none bg-transparent text-white placeholder-gray-400 pb-2"
+               placeholder="Confirm Password">
+
+        <button type="submit"
+                class="bg-green-500 hover:bg-green-600 transition text-white font-semibold py-2 rounded-lg">
+          SIGN UP
+        </button>
+
+        <a href="/login" class="text-center text-sm text-white hover:text-green-400 transition">
+          Already have an account?
+        </a>
+
+        <div id="errorMessage" class="text-sm text-red-400 mt-2 hidden"></div>
+        <div id="successMessage" class="text-sm text-green-400 mt-2 hidden"></div>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("registerForm");
+
+      // Jika sudah login, arahkan ke beranda
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (user) {
+        window.location.href = "/";
+        return;
+      }
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const username = document.getElementById("username").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
+        const confirm = document.getElementById("confirm").value.trim();
+
+        if (!email || !password || !confirm || !username) {
+          alert("Harap isi semua kolom!");
+          return;
+        }
+
+        if (password !== confirm) {
+          alert("Konfirmasi password tidak cocok!");
+          return;
+        }
+
+        const users = JSON.parse(localStorage.getItem("users")) || [];
+        const existing = users.find(u => u.email === email);
+        if (existing) {
+          alert("Email sudah terdaftar!");
+          return;
+        }
+
+        users.push({ username, email, password });
+        localStorage.setItem("users", JSON.stringify(users));
+
+        alert("Registrasi berhasil! Silakan login.");
+        window.location.href = "/login";
+      });
+    });
+  </script>
+
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+
+.glass {
+    background: rgba(255,255,255,0.02);
+    backdrop-filter: blur(6px);
+}
+
+.percent-badge {
+    font-size: 0.7rem;
+    padding: 0.18rem 0.35rem;
+    border-radius: 999px;
+}
+
+button:focus { 
+    outline: none; 
+    box-shadow: none; 
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  @if ($slots.meta)
+    {{{ await $slots.meta() }}}
+  @endif
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FURNIVO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    @stack('dumper')
+    @vite('resources/css/style.css')
+    @vite('resources/css/cart.css')  
+    @vite('resources/css/detail-product.css')
+    
+
+</head>
+<body>
+
+    @include('pages/partials/navbar')
+    <main>
+        {{{ await $slots.main() }}}
+    </main>
+
+    @include('pages/partials/footer')
+    @vite('resources/js/cart.js')
+    @vite('resources/js/card.js')
+    @vite('resources/js/index.js')
+</body>
+</html>

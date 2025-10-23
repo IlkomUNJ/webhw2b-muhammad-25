@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furnivo - Modern & Durable Furniture</title>
+    @vite(['resources/css/style.css'])
+    @vite(['resources/css/product_card.css'])
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <!-- ====== Header Section ====== -->
+    @include('pages/partials/navbar')
+
+    <!-- ====== Main Content ====== -->
+    <main class="main">
+        <section class="Judul">
+            <h1>OUR PRODUCT</h1>
+        </section>
+        
+        <div id="productContainer" class="mt-[50px] grid w-[80%] gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 max-w-8xl mx-auto lg:grid-cols-4"></div>
+    </main>
+
+<!-- ====== Footer Section ====== -->
+    @vite('resources/js/card.js')
+    @include('pages/partials/footer')
+</body>
+</html>

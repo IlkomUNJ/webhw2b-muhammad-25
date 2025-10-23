@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Daftar Produk - Seller</title>
+  @vite('resources/css/style.css')
+  <style>
+    :root{
+      --bg: #131313;
+      --card: #1b1b1b;
+      --input: #24303a;
+      --accent: #c5e943;
+      --muted: #9ca3af;
+      --text: #ffffff;
+    }
+    body { display: block;background: var(--bg); color: var(--text); }
+    .backdrop {
+      background: rgba(0,0,0,0.6);
+    }
+  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="antialiased">
+  @include('pages/partials/navbar')
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 mt-[100px]">
+
+    <div class="flex items-center justify-between mb-6">
+      <h1 class="text-2xl font-semibold">Daftar Produk</h1>
+      <div class="flex items-center gap-3">
+        <a href="/add"
+           class="inline-flex items-center gap-2 px-4 py-2 rounded-md font-medium text-black bg-[var(--accent)] hover:brightness-95 transition">
+          + Tambah Produk
+        </a>
+      </div>
+    </div>
+
+    <div class="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+      <div class="text-sm text-[var(--muted)]">Menampilkan <span id="count" class="font-medium">0</span> produk</div>
+      <div class="w-full sm:w-1/3">
+        <input id="search" type="text" placeholder="Cari judul..." 
+               class="w-full p-3 bg-[var(--input)] rounded-md placeholder: text-[var(--muted)] text-white"
+        />
+      </div>
+    </div>
+
+    <!-- table -->
+    <div class="bg-[var(--card)] rounded-lg shadow-sm overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="min-w-full table-auto">
+          <thead class="text-left">
+            <tr class="text-sm text-[var(--muted)]">
+              <th class="px-4 py-3">Gambar</th>
+              <th class="px-4 py-3">Judul</th>
+              <th class="px-4 py-3">Harga</th>
+              <th class="px-4 py-3">Stok</th>
+              <th class="px-4 py-3">Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="productTbody" class="divide-y divide-black/20">
+            <!-- JS will render rows -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- empty state -->
+    <div id="emptyState" class="mt-6 text-center text-[var(--muted)] hidden">
+      Belum ada produk. Klik "Tambah Produk" untuk menambahkan produk baru.
+    </div>
+
+  </div>
+
+  <div id="editModal" class="fixed inset-0 z-40 hidden items-center justify-center">
+    <div class="backdrop absolute inset-0"></div>
+    <div class="relative z-50 max-w-xl w-full mx-4">
+      <div class="bg-[var(--card)] rounded-lg p-6 shadow-lg">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-lg font-semibold">Edit Produk</h2>
+          <button id="closeModal" class="text-[var(--muted)]">&times;</button>
+        </div>
+
+        <form id="editForm" class="space-y-4">
+          <input type="hidden" id="editId" />
+
+          <div>
+            <label class="block text-sm mb-1">Judul</label>
+            <input id="editTitle" required class="w-full p-3 bg-[var(--input)] rounded-md text-white" />
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-sm mb-1">Harga</label>
+              <input id="editPrice" type="number" min="0" required class="w-full p-3 bg-[var(--input)] rounded-md text-white" />
+            </div>
+            <div>
+              <label class="block text-sm mb-1">Stok</label>
+              <input id="editStock" type="number" min="0" required class="w-full p-3 bg-[var(--input)] rounded-md text-white" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm mb-1">Deskripsi</label>
+            <textarea id="editDesc" rows="3" class="w-full p-3 bg-[var(--input)] rounded-md text-white"></textarea>
+          </div>
+
+          <div>
+            <label class="block text-sm mb-1">Ganti Gambar (opsional)</label>
+            <input id="editImages" type="file" accept=".jpg,.jpeg,.png" multiple class="w-full p-2 bg-[var(--input)] rounded-md text-white" />
+            <p class="text-xs text-[var(--muted)] mt-1">Maks 4 file. Jika memilih file, gambar akan diganti.</p>
+            <div id="previewRow" class="mt-3 flex gap-2 flex-wrap"></div>
+          </div>
+
+          <div class="flex items-center justify-end gap-3 pt-2">
+            <button type="button" id="cancelEdit" class="px-4 py-2 rounded-md bg-gray-700 text-white">Batal</button>
+            <button type="submit" class="px-4 py-2 rounded-md bg-[var(--accent)] text-black">Simpan</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+<script>
+
+  const products = [
+    { id: 'p1', name: "Modern Wooden Chair", price: "Rp 450.000", image: "/resources/elemen/Modern Wooden Chair.jpg", rating: "4,6", reviews: 110, link: "/detail" },
+    { id: 'p2', name: "Minimalist Study Desk", price: "Rp 850.000", image: "/resources/elemen/Minimalist Study Desk.jpg", rating: "4,8", reviews: 95, link: "/detail" },
+    { id: 'p3', name: "Classic Wardrobe", price: "Rp 1.250.000", image: "/resources/elemen/Classic Wardrobe.jpg", rating: "4,7", reviews: 75, link: "/detail" },
+    { id: 'p4', name: "Comfort Sofa 3-Seater", price: "Rp 2.350.000", image: "/resources/elemen/Comfort Sofa 3-Seater.jpg", rating: "4,9", reviews: 180, link: "/detail" },
+    { id: 'p5', name: "Round Coffee Table", price: "Rp 570.000", image: "/resources/elemen/Round Coffee Table.jpg", rating: "4,4", reviews: 64, link: "/detail" },
+    { id: 'p6', name: "Bed Frame with Storage", price: "Rp 1.890.000", image: "/resources/elemen/Bed Frame with Storage.jpg", rating: "4,8", reviews: 143, link: "/detail" }
+];
+
+  // elements
+  const tbody = document.getElementById('productTbody');
+  const countEl = document.getElementById('count');
+  const emptyState = document.getElementById('emptyState');
+  const searchInput = document.getElementById('search');
+
+  // render table
+  function renderTable(filter = "") {
+    const list = products.filter(p => p.name.toLowerCase().includes(filter.toLowerCase()));
+    tbody.innerHTML = "";
+    if (list.length === 0) {
+      emptyState.classList.remove('hidden');
+    } else {
+      emptyState.classList.add('hidden');
+    }
+    list.forEach(p => {
+      const tr = document.createElement('tr');
+
+      // image cell
+      const imgCell = document.createElement('td');
+      imgCell.className = 'px-4 py-4 align-top';
+      const img = document.createElement('img');
+      img.src = p.image  
+      img.alt = p.title;
+      img.className = 'w-24 h-16 object-cover rounded-md';
+      imgCell.appendChild(img);
+
+      // title cell
+      const titleCell = document.createElement('td');
+      titleCell.className = 'px-4 py-4 align-top';
+      titleCell.innerHTML = `<div class="font-medium">${escapeHtml(p.name)}</div>`
+
+      // price
+      const priceCell = document.createElement('td');
+      priceCell.className = 'px-4 py-4 align-top font-medium';
+      priceCell.textContent = p.price ;
+
+      // stok
+      const stockCell = document.createElement('td');
+      stockCell.className = 'px-4 py-4 align-top';
+      stockCell.textContent = 1000;
+
+      // actions
+      const actionCell = document.createElement('td');
+      actionCell.className = 'px-4 py-4 align-top';
+      const editBtn = document.createElement('button');
+      editBtn.className = 'mr-2 px-3 py-1 rounded-md border border-[var(--accent)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-black transition';
+      editBtn.textContent = 'Edit';
+      editBtn.onclick = () => openEditModal(p.id);
+
+      const delBtn = document.createElement('button');
+      delBtn.className = 'px-3 py-1 rounded-md bg-red-600 text-white';
+      delBtn.textContent = 'Hapus';
+      delBtn.onclick = () => deleteProduct(p.id);
+
+      actionCell.appendChild(editBtn);
+      actionCell.appendChild(delBtn);
+
+      tr.appendChild(imgCell);
+      tr.appendChild(titleCell);
+      tr.appendChild(priceCell);
+      tr.appendChild(stockCell);
+      tr.appendChild(actionCell);
+
+      tbody.appendChild(tr);
+    });
+
+    countEl.textContent = list.length;
+  }
+
+  renderTable();
+
+  // util: format rupiah simple
+  function formatRupiah(num) {
+    try {
+      return 'Rp ' + Number(num).toLocaleString('id-ID');
+    } catch(e) { return num; }
+  }
+
+  // escape for safe innerHTML of description/title
+  function escapeHtml(text) {
+    if (!text) return '';
+    return text.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+  }
+
+  // delete product
+  function deleteProduct(id) {
+    if (!confirm('Yakin ingin menghapus produk ini?')) return;
+    products = products.filter(p => p.id !== id);
+    renderTable(searchInput.value);
+    // TODO: di implementasikan fetch DELETE ke backend (Adonis)
+  }
+
+  // EDIT modal logic
+  const editModal = document.getElementById('editModal');
+  const closeModalBtn = document.getElementById('closeModal');
+  const cancelEditBtn = document.getElementById('cancelEdit');
+  const editForm = document.getElementById('editForm');
+  const previewRow = document.getElementById('previewRow');
+  const editImagesInput = document.getElementById('editImages');
+
+  function openEditModal(id) {
+    const p = products.find(x => x.id === id);
+    if (!p) return;
+    document.getElementById('editId').value = p.id;
+    document.getElementById('editTitle').value = p.title;
+    document.getElementById('editPrice').value = p.price;
+    document.getElementById('editStock').value = p.stock;
+    document.getElementById('editDesc').value = p.description;
+    previewRow.innerHTML = '';
+    // show current images
+    (p.images || []).slice(0,4).forEach(src => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.className = 'w-24 h-16 object-cover rounded-md';
+      previewRow.appendChild(img);
+    });
+    editImagesInput.value = null;
+    editModal.classList.remove('hidden');
+    editModal.classList.add('flex');
+  }
+
+  function closeModal() {
+    editModal.classList.add('hidden');
+    editModal.classList.remove('flex');
+  }
+
+  closeModalBtn.addEventListener('click', closeModal);
+  cancelEditBtn.addEventListener('click', (e) => { e.preventDefault(); closeModal(); });
+
+  // preview for chosen files in edit modal
+  editImagesInput.addEventListener('change', (ev) => {
+    const files = Array.from(ev.target.files);
+    previewRow.innerHTML = '';
+    if (files.length > 4) {
+      alert('Maks 4 file.');
+      editImagesInput.value = null;
+      return;
+    }
+    files.forEach(file => {
+      const ext = file.name.split('.').pop().toLowerCase();
+      if (!['jpg','jpeg','png'].includes(ext)) {
+        alert('Format tidak diizinkan: ' + file.name);
+        editImagesInput.value = null;
+        previewRow.innerHTML = '';
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        img.className = 'w-24 h-16 object-cover rounded-md';
+        previewRow.appendChild(img);
+      }
+      reader.readAsDataURL(file);
+    });
+  });
+
+  // save edit
+  editForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const id = Number(document.getElementById('editId').value);
+    const title = document.getElementById('editTitle').value.trim();
+    const price = Number(document.getElementById('editPrice').value);
+    const stock = Number(document.getElementById('editStock').value);
+    const desc = document.getElementById('editDesc').value.trim();
+    const files = Array.from(editImagesInput.files);
+
+    if (!title || isNaN(price) || isNaN(stock)) {
+      alert('Periksa input Anda.');
+      return;
+    }
+
+    const idx = products.findIndex(p => p.id === id);
+    if (idx === -1) return;
+
+    // jika ada files gambar baru -> ubah gambar (gunakan dataURL preview)
+    if (files.length > 0) {
+      if (files.length > 4) { alert('Maks 4 file.'); return; }
+      const readers = files.map(f => {
+        return new Promise((res, rej) => {
+          const r = new FileReader();
+          r.onload = () => res(r.result);
+          r.onerror = () => rej();
+          r.readAsDataURL(f);
+        });
+      });
+      Promise.all(readers).then(imagesData => {
+        // update product
+        products[idx] = { ...products[idx], title, price, stock, description: desc, images: imagesData };
+        renderTable(searchInput.value);
+        closeModal();
+        // TODO: kirim update ke backend (gunakan fetch/axios ke route Adonis)
+      }).catch(() => alert('Gagal membaca gambar.'));
+    } else {
+      // tanpa ganti gambar
+      products[idx] = { ...products[idx], title, price, stock, description: desc };
+      renderTable(searchInput.value);
+      closeModal();
+      // TODO: kirim update ke backend
+    }
+  });
+
+  // search filter
+  searchInput.addEventListener('input', (e) => {
+    renderTable(e.target.value);
+  });
+
+  // initial render done above
+
+</script>
+</body>
+</html>

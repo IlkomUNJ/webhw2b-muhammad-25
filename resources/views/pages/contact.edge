@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="contact.css">
+    <title>Furnivo - Modern & Durable Furniture</title>
+    @vite('resources/css/style.css')
+    @vite('resources/css/contact.css')
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <!-- ====== Header Section ====== -->
+    @include('pages/partials/navbar')
+
+    <!-- ====== Main Content ====== -->
+    <main class="main m-contact ">
+    
+        <div class="contact-form shadow-[0_0_10px_#c5e943]">
+            <h2>Contact Us</h2>
+            <form action="#" class="" method="POST">
+                <input type="text" class="border-b border-gray-600" name="name" placeholder="Your Name" required>
+                <input type="email" class="border-b border-gray-600" name="email" placeholder="Your Email" required>
+                <input type="text" class="border-b border-gray-600"name="subject" placeholder="Subject" required>
+                <textarea name="message" class="border-b border-gray-600" placeholder="Your Message..." required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- ====== Footer Section ====== -->
+    @include('pages/partials/footer')
+</body>
+</html>

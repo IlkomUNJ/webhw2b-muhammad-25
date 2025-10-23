@@ -1,0 +1,58 @@
+<header class="header">
+  <div class="kelompok_nav">
+    <!-- kiri: logo + judul -->
+    <div class="nav kel1">
+      <img src="/resources/elemen/logo.png" class="logo" alt="Furnivo Logo">
+      <a class="text_nav judul" href="/index">Furnivo</a>
+    </div>
+
+    <!-- tengah: search -->
+    <div class="search_wrap">
+      <form id="searchForm" onsubmit="return false;"  class="search_form">
+        <input 
+          id="searchInput"
+          type="text"
+          placeholder="Cari produk..."
+          class="px-3 py-2 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-[#00ff99]/50"
+        />
+        <button type="button" disabled class=" cursor-not-allowed bg-[#c5e943]">🔍</button>
+      </form>
+    </div>
+
+    <!-- kanan: nav items -->
+    <nav class="nav kel2">
+      <a href="/about" class="text_nav link_nav">About</a>
+
+      <!-- cart + badge (badge mengikuti alur flex, tidak absolute) -->
+      <a href="/cart" class="text_nav link_nav cart_link">
+        <span>Cart</span>
+        <span id="cartCount" class="cart_badge">0</span>
+      </a>
+
+      <a href="/contact" class="text_nav link_nav">Contact</a>
+      <a href="/login" id="authLink"  class="text_nav link_nav">Log in</a>
+    </nav>
+  </div>
+</header>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const authLink = document.getElementById("authLink");
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      if (user) {
+        authLink.textContent = "Logout";
+        authLink.href = "#";
+        authLink.addEventListener("click", (e) => {
+          e.preventDefault();
+          localStorage.removeItem("user");
+          alert("Logout berhasil!");
+          window.location.reload();
+        });
+      } else {
+        authLink.textContent = "Login";
+        authLink.href = "/login";
+      }
+    });
+  </script>

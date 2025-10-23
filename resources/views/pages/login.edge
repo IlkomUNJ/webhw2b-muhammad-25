@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="contact.css">
+    <title>Furnivo - Modern & Durable Furniture</title>
+    @vite('resources/css/style.css')
+    @vite('resources/css/contact.css')
+    @vite('resources/css/login.css')
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+
+    <main class="main flex justify-center items-center">
+    <div class="contact-form login shadow-shadow-[0_0_20px_rgba(197,233,67,0.1)]">
+      <h2>LOG IN</h2>
+
+      <form id="loginForm" action="#" method="POST">
+        <input type="email" id="email" name="email" class="border-b border-gray-600 outline-none" placeholder="Email" required>
+        <input type="password" id="password" name="password" class="border-b border-gray-600 outline-none mg" placeholder="Password" required>
+        <div id="errorMessage" class="text-sm text-red-400 mt-2 hidden"></div>
+        <button type="submit" class="mg">LOG IN</button>
+        <a class="text-center text-white hover:text-green-800" href="/register">Don't have account yet?</a>
+      </form>
+    </div>
+  </main>
+
+  @include('pages/partials/footer')
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("loginForm");
+      const errorMessage = document.getElementById("errorMessage");
+
+
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (user) {
+        window.location.href = "/";
+        return;
+      }
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
+
+
+        if (email === "admin@gmail.com" && password === "123") {
+          localStorage.setItem("user", JSON.stringify({ email, role: "admin" }));
+          alert("Login berhasil sebagai Admin!");
+          window.location.href = "/seller";
+          return;
+        }
+
+        const users = JSON.parse(localStorage.getItem("users")) || [];
+        const validUser = users.find(u => u.email === email && u.password === password);
+
+        if (validUser) {
+          localStorage.setItem("user", JSON.stringify({ email, role: "buyer" }));
+          alert("Login berhasil!");
+          window.location.href = "/";
+        } else {
+          errorMessage.textContent = "Email atau password salah atau akun belum terdaftar!";
+          errorMessage.classList.remove("hidden");
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

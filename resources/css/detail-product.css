@@ -1,0 +1,36 @@
+:root {
+    --bg: #131313; /* requested dark */
+    --accent: #00E676; /* bright green accent */
+    --muted: #9CA3AF;
+    --card: #1e1e1e;
+}
+/* small tweaks on top of Tailwind */
+body { 
+    background: var(--bg); 
+    color: #e6e6e6; 
+}
+.accent { 
+    color: var(--accent); 
+}
+.accent-bg { 
+    background-color: var(--accent); 
+}
+.card { 
+    background: var(--card); 
+}
+/* product image area mimic white window (like marketplace) */
+.photo-window { 
+    background: linear-gradient(180deg,#ffffff 0%, #f6f6f6 100%); 
+}
+/* keep shadows subtle on dark */
+.soft-shadow { 
+    box-shadow: 0 6px 20px rgba(0,0,0,0.6); 
+}
+/* thumbnail active border */
+.thumb-active { 
+    outline: 3px solid var(--accent); 
+}
+/* price highlight */
+.price { 
+    color: #ff6b47; 
+}

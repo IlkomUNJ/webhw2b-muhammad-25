@@ -1,0 +1,571 @@
+/* link untuk font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* html {
+  overflow-y: scroll;
+} */
+
+* {
+  box-sizing: border-box;
+}
+
+.main{
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin: 0;
+}
+
+body{
+    height: 100%;
+    flex-direction: column;
+    background-color: #131313;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: rgba(19, 19, 19, 0.98);
+    width: 100%;
+    height: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    position: fixed;
+    top: 0;
+    padding: 20px 50px 20px 50px;
+    left: 0;
+    z-index: 1000;
+}
+
+.text_nav {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-style: normal;
+    width: auto;
+    height: 100%;
+    text-align: center;
+    justify-content: center;
+}
+
+.link_nav{
+    display: flex;
+    flex: 1;
+    font-size: 20px;
+    font-weight: 400;
+    margin-left: 20px;
+    margin-top: 15px;
+    width: auto;
+    line-height: 1.4;
+    text-decoration: none;
+}
+
+.judul{
+    font-weight: 700;
+    padding: 5px;
+    padding-top: 10px;
+    font-size: 32px;
+    text-decoration: none;
+}
+
+.kelompok_nav{
+    display: flex;
+    flex: none;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: auto;
+    height: 45px;
+}
+
+.logo{
+    width: auto;
+    height: 100%;
+    object-fit: contain;
+}
+
+.kel2 {
+    padding-left: 20px;
+}
+
+.nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 33%;
+    height: 100%;
+}
+
+/* Tambahkan / ganti CSS ini (cukup bagian header & nav) */
+.header {
+  background-color: rgba(19,19,19,0.98);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 16px 50px;
+  z-index: 1000;
+}
+
+/* Kontainer utama header: tempatkan semua item sejajar tengah */
+.kelompok_nav{
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;    /* <-- penting supaya semua sejajar vertikal */
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* Logo + judul */
+.nav.kel1 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.logo {
+  height: 40px;          /* atur sesuai ukuran logo */
+  width: auto;
+  object-fit: contain;
+}
+.judul {
+  font-weight: 700;
+  font-size: 28px;
+  padding: 0;            /* hilangkan padding-top yg bikin tidak sejajar */
+  margin: 0;
+}
+
+/* Search kecil (pertahankan style lama jika mau) */
+.search_wrap { flex: 1; max-width: 520px; }
+.search_form { display:flex; gap:8px; align-items:center; }
+.search_form input {
+  flex:1; padding:10px 14px; border-radius:999px; background:rgba(255,255,255,0.06);
+  color:#fff; border:none; outline:none;
+}
+.search_form button { padding:8px 12px; border-radius:999px; }
+
+/* Nav kanan: setiap link pakai inline-flex supaya contents sejajar */
+.nav.kel2 {
+  display: flex;
+  align-items: center;   /* <-- penting */
+  gap: 18px;
+}
+
+/* Hapus margin-top yang bermasalah, dan gunakan inline-flex */
+.link_nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 20px;
+  margin-left: 0;
+  margin-top: 0;         /* <- perbaikan utama */
+  text-decoration: none;
+  color: white;
+  padding: 6px 4px;
+}
+
+.cart_link { 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 8px; 
+    position: relative; 
+}
+
+.cart_badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: #00e676;   /* hijau */
+  color: #000;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1;
+}
+
+@media (max-width: 800px){
+  .search_wrap { display:none; }
+  .judul { font-size: 22px; }
+  .link_nav { font-size:18px; }
+}
+
+
+.kel3{
+    justify-content: flex-end;
+}
+
+.medsos_logo {
+    width: auto;
+    height: 80%;
+}
+.bg{
+    position: absolute;
+    margin: -150px 0px 0px 0px;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    z-index: 1;
+}
+
+.background {
+    width: 50%;
+    height: 1200px;
+    z-index: 1;
+    object-fit: cover;
+}
+
+.kanan{
+    object-position: right center;
+    margin-top: 0px;
+}
+
+.kiri{
+    margin-top: 750px;
+    object-position: left center;
+}
+
+.bagian1{
+    position: relative;
+    margin: 150px 100px 0px 100px;
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    z-index: 2;
+}
+
+.bagian1_1{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    max-width: 50%;
+}
+
+.bagian1_1{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    max-width: 50%;
+}
+
+.bagian1_2{
+    display: flex;
+    flex-direction: column;
+    width: 42%;
+    height: auto;
+    max-width: 50%;
+    margin-right: 50px;
+}
+
+.textPembuka {
+    color: white;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    text-align: left;
+    width: auto;
+    font-size: 100px;
+    height: auto;
+    justify-content: flex-start;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+
+.pembuka_awal {
+    font-weight: 550;
+}
+
+.pembuka_akhir {
+    font-weight: 400;
+}
+
+.garis{
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    opacity: 0.2;
+    margin: 50px 0px 30px 0px;
+}
+
+.kata_pembuka {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    width: auto;
+    height: auto;
+    font-size: 20px;
+    line-height: 1.2;
+    text-align: left;
+    justify-content: flex-start;
+}
+
+.btn {
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(135deg, #c5e943, #06b6d4);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    width: 38%;
+}
+
+.btn:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    background: linear-gradient(135deg, #06b6d4, #4f46e5);
+}
+
+.btn:active {
+    transform: scale(0.97);
+}
+
+.gambar1{
+    width: auto;
+    height: 530px;
+    object-fit: cover;
+    margin-right: 100px;
+    object-position: bottom center;
+}
+
+.slide-in-right {
+  transform: translateX(100px);
+  opacity: 0;
+  animation: slideInRight 0.8s ease forwards;
+}
+
+@keyframes slideInRight {
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-left {
+    transform: translateX(-100px);
+    opacity: 0;
+    animation: slideInLeft 1s ease forwards;
+}
+
+@keyframes slideInLeft {
+    to {
+    transform: translateX(0);
+    opacity: 1;
+    }
+}
+
+.text_judul{
+    color: white;
+    letter-spacing: -0.02em;
+    line-height: 0.9;
+    text-align: left;
+    width: 100%;
+    font-size: 50px;
+    height: auto;
+    font-weight: 300;
+    justify-content: flex-start;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+
+.bagian2_2{
+    justify-content: center;
+    padding-right: 100px;
+    align-items: center;
+}
+
+.bagian2_2 p{
+    opacity: 0.8;
+    font-size: 18px;
+}
+
+.gambar2{
+    width: auto;
+    height: 630px;
+    object-fit: cover;
+    margin-right: 100px;
+    object-position: right center;
+}
+
+.bagian_gambar{
+    margin: 0px 100px 0px 100px;
+}
+
+.keatasin {
+    margin-top: -100px;
+}
+.keatasinSedikit {
+    margin-top: -70px;
+}
+
+.bagian2{
+    margin-top: 200px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    padding: 0px 50px 0px 50px;
+}
+
+.bagian2 h2 {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 40px;
+    font-weight: 400;
+    height: auto;
+    line-height: 0.9;
+    width: auto;
+    margin: 15px 0px 0px 0px;
+}  
+
+.bagian2 h3 {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    height: auto;
+    line-height: 0.9;
+    width: auto;
+    opacity: 0.7;
+    margin-bottom: 0px;
+}  
+
+.bagian3 {
+    margin-top: 120px;
+    display: flex;
+    width: 100%;
+    height: 400px;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.kelompok {
+    height: 400px;
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    transition: flex 0.5s ease;
+    cursor: pointer;
+}
+
+.kelompok img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.7;
+    transition: transform 0.5s ease;
+}
+
+.kelompok:hover {
+    flex: 3; /* blok membesar */
+}
+
+.kelompok:hover img {
+    opacity: 1;
+    transform: scale(1.1); /* gambar zoom */
+}
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.kelompok:hover .overlay {
+    opacity: 1; /* teks muncul */
+}
+
+.overlay h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.overlay p {
+    font-size: 14px;
+    line-height: 1.4;
+    font-family: 'Roboto', sans-serif;
+}
+
+.footer {
+    width: 100%;
+    position: relative;
+    margin-top: 150px;
+    background: #000; 
+    color: #fff;
+    padding: 50px 20px 20px;
+    font-family: Arial, sans-serif;
+    z-index: 4;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
+}
+.footer-column {
+    flex: 1 1 250px;
+    margin: 20px;
+}
+
+.footer-column h3 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #00ff99;
+}
+
+.footer-column p,
+.footer-column ul {
+    font-size: 14px;
+    line-height: 1.8;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-column a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-column a:hover {
+    color: lightgreen;
+}
+
+.footer-column ul {
+    list-style: none;
+}
+
+.social-links li {
+    margin-bottom: 8px;
+}
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid #333;
+    margin-top: 40px;
+    padding-top: 15px;
+    font-size: 13px;
+    color: #aaa;
+}
