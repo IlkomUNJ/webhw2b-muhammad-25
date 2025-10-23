@@ -1,0 +1,9 @@
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/VfW8bnt7)
+# WebHw2
+Name: Muhammad 
+
+To access the seller account, you need to log in with the following conditions.
+email : admin@gmail.com
+password : 123
+
+This program uses localStorage to store data on the frontend (browser), meaning all information like login state or user data is saved locally on the user's device, not on a server or external database.
